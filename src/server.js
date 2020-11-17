@@ -1,6 +1,7 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
+const path = require('path');
 
 const app = express();
 
@@ -10,6 +11,13 @@ var corsOptions = {
 
 app.use(cors(corsOptions));
 
+// Serve only the static files form the angularapp directory
+app.use(express.static(__dirname + '/angularapp'));
+
+app.get('/*', function(req,res) {
+ 
+  res.sendFile(path.join(__dirname+'/angularapp/index.html'));
+  });
 // parse requests of content-type - application/json
 app.use(bodyParser.json());
 
@@ -29,7 +37,7 @@ db.sequelize.sync();
 
 // simple route
 app.get("/", (req, res) => {
-  res.json({ message: "Welcome to bezkoder application." });
+  res.json({ message: "Welcome to my application." });
 });
 
 // routes
@@ -38,7 +46,7 @@ require('./app/routes/user.routes')(app);
 
 // set port, listen for requests
 const PORT = process.env.PORT || 8080;
-app.listen(PORT, () => {
+app.listen(process.env.PORT || PORT, () => {
   console.log(`Server is running on port ${PORT}.`);
 });
 

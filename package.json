@@ -3,15 +3,18 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "node server.js",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "postinstall": "ng build --output-path angularapp  --aot --prod"
   },
   "private": true,
   "dependencies": {
     "@angular/animations": "~10.1.1",
+    "@angular/cli": "~10.1.1",
+    "@angular/compiler-cli": "~10.1.1",
     "@angular/common": "~10.1.1",
     "@angular/compiler": "~10.1.1",
     "@angular/core": "~10.1.1",
